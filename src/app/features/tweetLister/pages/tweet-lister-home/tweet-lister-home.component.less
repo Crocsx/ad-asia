@@ -1,21 +1,43 @@
+@import "../../../../styles/palette.less";
+
 .header {
     height: 5%;
     margin-left: 5%;
     position: relative;
     display: inline-flex;
+
+    .selected{
+        background-color: @light-grey;
+        color: @light-blue;
+    }
 }
 
 .content {
     height: 95%;
     padding: 0 5% 5% 5%;
-    background-color: #b1b1b1;
+    background-color: @light-grey;
     position: relative;
+    display: inline-flex;
+    flex-direction: column;
 
     .content_header {
-        height: 5%;
+
     }
 
     .content_content {
-        height: 95%;
+        flex: 1;
+ 
+        .loading-shade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 56px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }

@@ -1,38 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Tweet } from '../../models/tweetList.models';
+import DateUtils from 'src/app/utils/date.utils';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+
+interface TableTweet {
+  tweet: string;
+  likes: number;
+  replies: number;
+  retweet: number;
+  hashtag: string;
+  date: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-tweet-lister',
   templateUrl: './tweet-lister.component.html',
   styleUrls: ['./tweet-lister.component.less']
 })
-export class TweetListerComponent implements OnInit {
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class TweetListerComponent implements OnChanges {
+  @Input() tweets: Tweet[];
+  displayedColumns: string[] = ['tweet', 'likes', 'replies', 'retweet', 'hashtag', 'date'];
+  dataSource: TableTweet[] = [];
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty('tweets')) {
+      this.createTableTweets(changes.tweets.currentValue);
+    }
   }
 
+  createTableTweets(tweets: Tweet[]) {
+    this.dataSource = [];
+    tweets.forEach(tweet => {
+      this.dataSource.push({
+        tweet: tweet.text,
+        likes: tweet.likes,
+        replies: tweet.replies,
+        retweet: tweet.retweets,
+        hashtag: tweet.hashtags.join(', '),
+        date: DateUtils.formatForDisplay(new Date(tweet.date))
+      });
+    });
+  }
 }

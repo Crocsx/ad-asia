@@ -19,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatToolbarModule,
     MatTableModule,
     MatTooltipModule,
-    MatSliderModule
+    MatSliderModule,
+    MatPaginatorModule
   ],
   declarations: [],
   exports: [
@@ -64,7 +66,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatSliderModule
+    MatSliderModule,
+    MatPaginatorModule
   ]
 })
 

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://anymind-recruitment-python-backend.adasia.biz'
+  apiEndpoint: 'https://anymind-recruitment-python-backend.adasia.biz/'
 };
 
 /*

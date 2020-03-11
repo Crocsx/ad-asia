@@ -1,12 +1,25 @@
 <div class="header">
-  <button mat-button>HOME</button>
-  <button mat-button>NBO HOME</button>
+  <button 
+    mat-button
+    [ngClass]="{'selected' : searchType === SearchType.USER}"
+    (click)="setSearchType(SearchType.USER)">
+      USER
+    </button>
+  <button 
+    mat-button
+    [ngClass]="{'selected' : searchType === SearchType.HASHTAG}"
+    (click)="setSearchType(SearchType.HASHTAG)">
+      HASHTAG
+    </button>
 </div>
 <div class="content">
   <div class="content_header">
-    <app-tweet-lister-search></app-tweet-lister-search> 
+    <app-tweet-lister-search [searchType]="searchType" (executeSearch)="search($event)"></app-tweet-lister-search> 
   </div>
   <div class="content_content">
-    <app-tweet-lister></app-tweet-lister> 
+    <div *ngIf="loading"class="loading-shade">
+      <mat-spinner></mat-spinner>
+    </div>
+    <app-tweet-lister [tweets]="tweets"></app-tweet-lister> 
   </div>
 </div>
