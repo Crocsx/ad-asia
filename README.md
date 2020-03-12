@@ -4,7 +4,7 @@
 - Routing is included during install but I am not using (just 2 routes)
 - There is no store system (ngrx, ngxs...) because the app is farily small, and I believe it would be overkill.
 - The folder architecture is a new structure that I wanted to test.
-- There are many thing that could be improved (like caching the tweet...), but I believe it is good enough for now.
+- There are many thing that could be improved (like the pagination and the global simplicity...)
 
 ## Development server
 
