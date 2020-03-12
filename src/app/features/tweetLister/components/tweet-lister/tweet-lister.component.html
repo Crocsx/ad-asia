@@ -6,4 +6,6 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  {{displayedColumns.length}}
 </table>
+<div *ngIf="dataSource.length === 0">No tweets found</div>
