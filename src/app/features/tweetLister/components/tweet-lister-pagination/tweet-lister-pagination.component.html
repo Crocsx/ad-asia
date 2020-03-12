@@ -26,4 +26,11 @@
     mat-button>
         >
     </button>
+    <button 
+    class="pointer button"
+    *ngIf="nextPageAvailable && lastPage() > (page + 1)"
+    (click)="goTo(lastPage())"
+    mat-button>
+        >>
+    </button>
 </div>

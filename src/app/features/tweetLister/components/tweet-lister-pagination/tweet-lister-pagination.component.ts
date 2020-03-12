@@ -57,4 +57,13 @@ export class TweetListerPaginationComponent {
   pageOffset(): number {
     return this.page < this.size ? Math.floor(this.size * 0.5) : this.page - Math.ceil(this.size * 0.5);
   }
+
+  /**
+   * @description get last currently loaded page
+   *
+   * @returns last currently loaded page
+   */
+  lastPage(): number {
+    return (this.itemCount / this.perPage);
+  }
 }
