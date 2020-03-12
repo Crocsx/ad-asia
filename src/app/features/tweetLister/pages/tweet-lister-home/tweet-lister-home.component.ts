@@ -90,8 +90,7 @@ export class TweetListerHomeComponent {
    */
   search(request: SearchRequest): void {
     this.searchValue = request.value;
-    this.clear();
-    this.loadTweets(this.offset, this.searchValue);
+    this.reload();
   }
 
   /**
@@ -127,6 +126,15 @@ export class TweetListerHomeComponent {
    */
   isTheEnd(): boolean {
     return this.tweetService.endReached;
+  }
+
+  /**
+   * @description reload the tweet list in order to get the most recent tweets
+   * with the current conditions
+   */
+  reload(): void {
+    this.clear();
+    this.loadTweets(this.offset, this.searchValue);
   }
 
   /**
