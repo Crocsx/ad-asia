@@ -1,0 +1,29 @@
+<div>
+    <button 
+    class="pointer button"
+    *ngIf="page > 1"
+    (click)="goTo(1)"
+    mat-button>
+        <<
+    </button>
+    
+    <button 
+    [ngClass]="{
+        'pointer': true,
+        'button': true,
+        'selected' : pageNb === page, 
+        'unselected' : pageNb !== page
+    }"
+    *ngFor="let pageNb of pageCount() | range: pageOffset()"
+    (click)="goTo(pageNb)"
+    mat-button>
+        {{pageNb}}
+    </button>
+    <button 
+    class="pointer button"
+    *ngIf="nextPageAvailable"
+    (click)="goTo(page + 1)"
+    mat-button>
+        >
+    </button>
+</div>

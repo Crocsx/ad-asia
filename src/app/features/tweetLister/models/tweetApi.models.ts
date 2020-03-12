@@ -12,3 +12,7 @@ export interface GetTweetByHashtag {
     results: Tweet[];
 }
 
+export interface GetTweetError {
+    error: string;
+}
+

@@ -1,6 +1,6 @@
 export enum SearchType {
-    USER = 'User',
-    HASHTAG = 'Hashtag'
+    USER = 'users',
+    HASHTAG = 'hashtags'
 }
 
 export interface SearchRequest {

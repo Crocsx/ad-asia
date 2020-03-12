@@ -3,14 +3,14 @@
     mat-button
     [ngClass]="{'selected' : searchType === SearchType.USER}"
     (click)="setSearchType(SearchType.USER)">
-      USER
-    </button>
+    User
+  </button>
   <button 
     mat-button
     [ngClass]="{'selected' : searchType === SearchType.HASHTAG}"
     (click)="setSearchType(SearchType.HASHTAG)">
-      HASHTAG
-    </button>
+    Hashtag
+  </button>
 </div>
 <div class="content">
   <div class="content_header">
@@ -20,6 +20,14 @@
     <div *ngIf="loading"class="loading-shade">
       <mat-spinner></mat-spinner>
     </div>
-    <app-tweet-lister [tweets]="tweets"></app-tweet-lister> 
+    <app-tweet-lister [tweets]="tweets"></app-tweet-lister>
+  </div>
+  <div class="content_content">
+    <app-tweet-lister-pagination
+    [itemCount]="getTweetCount()"
+    [perPage]="pageLimit"
+    [page]="getPage()"
+    (goToPage)="goToPage($event)"
+    [nextPageAvailable]="!isTheEnd()"></app-tweet-lister-pagination>
   </div>
 </div>

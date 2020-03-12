@@ -4,12 +4,14 @@ import { TweetListerComponent } from './components/tweet-lister/tweet-lister.com
 import { TweetListerSearchComponent } from './components/tweet-lister-search/tweet-lister-search.component';
 import { TweetService } from './services/tweet.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TweetListerPaginationComponent } from './components/tweet-lister-pagination/tweet-lister-pagination.component';
 
 @NgModule({
   declarations: [
     TweetListerComponent,
     TweetListerHomeComponent,
-    TweetListerSearchComponent
+    TweetListerSearchComponent,
+    TweetListerPaginationComponent
   ],
   imports: [
     SharedModule

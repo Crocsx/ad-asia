@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TruncatePipe } from './pipes/limitTo.pipe';
+import { RangePipe } from './pipes/range.pipe';
 
 @NgModule({
   exports: [
@@ -11,10 +12,12 @@ import { TruncatePipe } from './pipes/limitTo.pipe';
     HttpClientModule,
     CommonModule,
     FormsModule,
-    TruncatePipe
+    TruncatePipe,
+    RangePipe
   ],
   declarations: [
-    TruncatePipe
+    TruncatePipe,
+    RangePipe
   ],
   imports: [
     MaterialModule,

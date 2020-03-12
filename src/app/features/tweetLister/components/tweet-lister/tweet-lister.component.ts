@@ -18,8 +18,18 @@ interface TableTweet {
   styleUrls: ['./tweet-lister.component.less']
 })
 export class TweetListerComponent implements OnChanges {
+  /**
+   * @description list of tweets to display
+   */
   @Input() tweets: Tweet[];
+  /**
+   * @description titles of the table
+   */
   displayedColumns: string[] = ['tweet', 'likes', 'replies', 'retweet', 'hashtag', 'date'];
+
+  /**
+   * @description displayable tweet
+   */
   dataSource: TableTweet[] = [];
 
   constructor() { }
@@ -30,7 +40,10 @@ export class TweetListerComponent implements OnChanges {
     }
   }
 
-  createTableTweets(tweets: Tweet[]) {
+  /**
+   * @description create the pagination based on the tweet
+   */
+  createTableTweets(tweets: Tweet[]): void {
     this.dataSource = [];
     tweets.forEach(tweet => {
       this.dataSource.push({
