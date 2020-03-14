@@ -9,7 +9,7 @@ export class TweetListerPaginationComponent {
   /**
    * @description size of the paginator (count of button)
    */
-  @Input() size = 3;
+  @Input() size = 5;
   /**
    * @description total element per page
    */
@@ -38,8 +38,7 @@ export class TweetListerPaginationComponent {
    * @returns current page count
    */
   pageCount(): number {
-    const pageNumber = this.page;
-    return pageNumber < this.size ? pageNumber : this.size;
+    return this.isLastPageLoadedUnderPageSize() ? this.page : this.size;
   }
 
   /**
@@ -51,11 +50,37 @@ export class TweetListerPaginationComponent {
 
   /**
    * @description Calculate the current page offset
-   * 
+   * This function is a bit complicated, but it's because the assignment never return the total amount of tweet.
+   * in this case, I believe a pagination should not be used, but instead, we should use infinite scroll.
+   * The problem is, we want to always show to the user page that are loaded, and never allow user to do a big loading gap.
+   * If for exemple our pagination is size 5 (1 / 2 / 3/ 4 / 5) but user only loaded the 3 first tweet we would not want him to load
+   * the 50 tweet, cause there might be only 40
+   *
    * @returns the current page offset
    */
   pageOffset(): number {
-    return this.page < this.size ? Math.floor(this.size * 0.5) : this.page - Math.ceil(this.size * 0.5);
+    // If the last page is under the pagination size,
+    // we must always show page 1
+    if (this.isLastPageLoadedUnderPageSize()) {
+      return 1;
+    } else {
+      // If the last page is over the pagination size,
+      // and we are the lasat page, we must not show additional page (cause there might be no tweet)
+      if (this.page === this.lastPage()) {
+        return this.page - (this.size - 1);  // always show current page as last page
+      } else {
+        let obs;
+        // If we are in the middle of loaded page, the gap to last page should not be higher than the loaded page
+        // so we must not show additional page (cause there might be no tweet)
+        if (this.lastPage() < this.page + Math.ceil(this.size * 0.5)) {
+          obs = (this.lastPage() - this.size) + 1;
+        } else {
+          // If we are in the middle of loaded pages, We want to show the current available gap beetween loaded pages to max loaded page
+          obs = this.page - Math.floor(this.size * 0.5);
+        }
+        return (Math.abs(obs || 1));
+      }
+    }
   }
 
   /**
@@ -64,6 +89,16 @@ export class TweetListerPaginationComponent {
    * @returns last currently loaded page
    */
   lastPage(): number {
-    return (this.itemCount / this.perPage);
+    return Math.ceil(this.itemCount / this.perPage);
+  }
+
+  /**
+   * @description return true if the last page we currently loaded is lower than
+   * the pagination size.
+   *
+   * @returns is the last page lower than the pagination size
+   */
+  isLastPageLoadedUnderPageSize(): boolean {
+    return ((this.page < this.size && this.page === this.lastPage()));
   }
 }

@@ -61,7 +61,7 @@ export class TweetService {
    * @returns list of tweet
    */
   getTweets(value: string, condition: SearchType, limit = 0, offset = 0): Observable<Tweet[]> {
-    if (this.tweets.length >= offset + limit) {
+    if (this.endReached || this.tweets.length >= offset + limit) {
       return new Observable(obs => {
         obs.next(this.tweets.slice(offset, offset + limit));
         obs.complete();
