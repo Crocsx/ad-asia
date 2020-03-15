@@ -72,6 +72,7 @@ export class TweetService {
           if (( res as GetTweetError).error) {
             this.snackBar.open(( res as GetTweetError).error, 'ok', {duration: 2000});
             this.tweets = [];
+            this.endReached = true;
             return [];
           }
           const tweetResponse = ( res as GetTweetByUser);

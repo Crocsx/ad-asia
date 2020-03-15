@@ -38,7 +38,7 @@ export class TweetListerPaginationComponent {
    * @returns current page count
    */
   pageCount(): number {
-    return this.isLastPageLoadedUnderPageSize() ? this.page : this.size;
+    return this.shouldShowPaginationSize() ? this.page : this.size;
   }
 
   /**
@@ -61,7 +61,7 @@ export class TweetListerPaginationComponent {
   pageOffset(): number {
     // If the last page is under the pagination size,
     // we must always show page 1
-    if (this.isLastPageLoadedUnderPageSize()) {
+    if (this.shouldShowPaginationSize()) {
       return 1;
     } else {
       // If the last page is over the pagination size,
@@ -93,12 +93,12 @@ export class TweetListerPaginationComponent {
   }
 
   /**
-   * @description return true if the last page we currently loaded is lower than
-   * the pagination size.
+   * @description return true if the pagination sohuld use the pagination size,
+   * or if the pagination size should be avoided to to the current pagination state
    *
    * @returns is the last page lower than the pagination size
    */
-  isLastPageLoadedUnderPageSize(): boolean {
-    return ((this.page < this.size && this.page === this.lastPage()));
+  shouldShowPaginationSize(): boolean {
+    return ((this.page < this.size && (this.page === this.lastPage() || this.lastPage() === 0)));
   }
 }

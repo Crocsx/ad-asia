@@ -28,7 +28,7 @@
     </button>
     <button 
     class="pointer button"
-    *ngIf="nextPageAvailable && lastPage() > (page + 1)"
+    *ngIf="lastPage() > page"
     (click)="goTo(lastPage())"
     mat-button>
         >>
